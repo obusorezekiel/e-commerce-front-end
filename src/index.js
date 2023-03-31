@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
   <React.StrictMode>
     <App />
+    {/* Here is the test KEY : {process.env.REACT_APP_API} */}
   </React.StrictMode>,
   document.getElementById('root')
 );
