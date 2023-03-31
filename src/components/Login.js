@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { API } from "./config";
 const Login = () => {
 
     const [email, setEmail] = React.useState('');
@@ -14,7 +15,8 @@ const Login = () => {
     }, [])
 
     const handleLogin = async () => {
-        let result = await fetch(`${process.env.REACT_APP_API}/login`, {
+        // let result = await fetch(`${process.env.REACT_APP_API}/login`, {
+        let result = await fetch(`${API}/login`, {
             method: 'post',
             body: JSON.stringify({ email, password }),
             headers: {

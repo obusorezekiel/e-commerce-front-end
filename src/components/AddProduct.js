@@ -1,4 +1,5 @@
 import React from 'react';
+import { API } from "./config";
 
 const AddProduct = () => {
     const [name, setName] = React.useState('');
@@ -16,7 +17,7 @@ const AddProduct = () => {
         }
 
         const userId = JSON.parse(localStorage.getItem('user'))._id;
-        let result = await fetch(`${process.env.REACT_APP_API}/add-product`, {
+        let result = await fetch(`${API}/add-product`, {
             method: "post",
             body: JSON.stringify({ name, price, category, company, userId }),
             headers: {

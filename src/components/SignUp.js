@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'
+import { API } from "./config";
 
 const SignUp = () => {
     const [name, setName] = useState("");
@@ -15,7 +16,7 @@ const SignUp = () => {
 
     const collectData = async () => {
         console.warn(name, email, password);
-        let result = await fetch(`${process.env.REACT_APP_API}/register`, {
+        let result = await fetch(`${API}/register`, {
             method: 'post',
             body: JSON.stringify({ name, email, password }),
             headers: {
