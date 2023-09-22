@@ -30,3 +30,24 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/e-commerce-front-end:${{ github.sha }} 
+
+      - name: The current paths
+        run:
+          echo $PWD
+      - name: Checkout GitOps
+        uses: actions/checkout@v3
+        with:
+          repository: obusorezekiel/gitops
+          path: ./gitops
+          ref: main
+          token: ${{ secrets.REPO_PAT }}
+      
+      - name: update kustomization in gitops
+        run:  |
+          cd gitops
+          sed -Ei "/\-\ name\:\ obusorezekiel\/e\-commerce\-front\-end$/{n;s/\w+$/${{ github.sha }}/}" ./deployments/node-app/kustomization.yaml
+          git config --global user.email "obusorezekiel@gmail.com"
+          git config --global user.name "gitops"
+          git add .
+          git commit -m "Deploying latest image"
+          git pull && git push
